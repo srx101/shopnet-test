@@ -17,7 +17,7 @@
 Test realizado con React Js.
 
 <p align="center">
-  <img src="./public/logo512.png" alt="React logo" width="738">
+  <img src="./public/logo512.png" alt="React logo">
 </p>
 
 Enlace al deploy de Firebase Hosting: 
