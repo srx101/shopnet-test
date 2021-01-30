@@ -16,7 +16,6 @@ export default function Covid() {
 
         axios.get('https://covid-19.dataflowkit.com/v1')
             .then(({ data }) => {
-                console.log(data);
                 setCovidData(data)
                 setLoading(false)
             }).catch((e) => {
@@ -25,17 +24,37 @@ export default function Covid() {
 
     }, [])
 
+    const headerStyle = {
+        backgroundColor: '#2ec4b6',
+        textAlign: 'center',
+        borderBottomLeftRadius: 30,
+        borderBottomRightRadius: 30
+    };
 
-
+    const titleStyle = {
+        textAlign: 'center',
+        color: 'white',
+        padding: 20
+    }
 
     return (
         <div>
-            <Title style={{textAlign:'center'}}>Casos Mundiales de COVID-19</Title>
-            {loading ? <Skeleton active /> : 
-            covidData.map((country) => (
-                <ListItem setVisible={setVisible} setCntr={setCntr} country={country} />
-            ))}
-            <ModalCovid visible={visible} cntr={cntr} setVisible={setVisible} />
+            <div style={headerStyle}>
+                <Title style={titleStyle}>Casos Mundiales de COVID-19</Title>
+            </div>
+            {loading ? <Skeleton active /> :
+                covidData.map((country) => (
+                    <ListItem
+                        setVisible={setVisible}
+                        setCntr={setCntr}
+                        country={country}
+                    />
+                ))}
+            <ModalCovid
+                visible={visible}
+                cntr={cntr}
+                setVisible={setVisible}
+            />
         </div>
     )
 }

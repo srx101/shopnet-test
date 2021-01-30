@@ -1,8 +1,10 @@
 import React from 'react';
-import { Card, Typography } from 'antd';
+import { Card, Typography, Row, Col } from 'antd';
+import { FlagOutlined } from '@ant-design/icons';
+import Flag from 'react-world-flags';
+import {countries} from '../utils/CountryCodes';
 
-
-export default function ListItem({ country, setVisible, setCntr }) {
+export default function ListItem({ country, setVisible, setCntr, modal }) {
 
     const { Title, Text } = Typography;
 
@@ -11,83 +13,70 @@ export default function ListItem({ country, setVisible, setCntr }) {
         setVisible(true);
     }
 
-    const gridStyle = {
-        width: '25%',
-        textAlign: 'center',
+    const cardStyle = {
+        alignSelf: 'center',
+        borderRadius: 10,
+        margin: 15,
+
     }
 
-    const cardStyle = {
-        alignContent: 'center',
-        textAlign: 'center',
-        margin: 15
+    const flagStyle = {
+        fontSize: 64
     }
+
+    const flexStyle={
+        flexDirection: 'column'
+    }
+
 
     return (
-        <Card style={cardStyle} hoverable={setVisible} onClick={setVisible ? () => onCardClick() : null}>
-            <Title style={{ margin: 10 }} level={4}>{country.Country_text}</Title>
 
+        country.Country_text ? <Card style={cardStyle} bordered={!modal} hoverable={setVisible} onClick={!modal ? () => onCardClick() : null}>
+            {!modal ? <Title style={{ margin: 10, color: '#2ec4b6' }} level={4}>{country.Country_text}</Title> : null}
 
-            <Card.Grid hoverable={false} style={gridStyle}>
-                <div style={{ flexDirection: 'column' }} >
-                    <Title keyboard level={5}>Total Muertes</Title>
-                    <Text type="danger">{country['Total Deaths_text']}</Text>
-                </div>
-            </Card.Grid>
-            <Card.Grid hoverable={false} style={gridStyle}>
-                <div style={{ flexDirection: 'column' }}>
-                    <Title keyboard level={5}>Total Recuperados</Title>
-                    <Text type='success'>{country['Total Recovered_text']}</Text>
-                </div>
-            </Card.Grid>
-            <Card.Grid hoverable={false} style={gridStyle}>
-                <div style={{ flexDirection: 'column' }}>
-                    <Title keyboard level={5}>Nuevos Casos</Title>
-                    <Text>{country['New Cases_text'] !== '' ? country['New Cases_text'] : 'N/A'}</Text>
-                </div>
-            </Card.Grid>
-            <Card.Grid hoverable={false} style={gridStyle}>
-                <div style={{ flexDirection: 'column' }}>
-                    <Title keyboard level={5}>Nuevas Muertes</Title>
-                    <Text>{country['New Deaths_text'] !== '' ? country['New Deaths_text'] : 'N/A'}</Text>
-                </div>
-            </Card.Grid>
-            <Card.Grid hoverable={false} style={gridStyle}>
-                <div style={{ flexDirection: 'column' }}>
-                    <Title keyboard level={5}>Última Actualización</Title>
-                    <Text>{country['Last Update']}</Text>
-                </div>
-            </Card.Grid>
-
-
-            {/*             
-            <div style={{ display: "flex", marginBottom: '1.5rem', textAlign: 'center', alignContent: 'center' }}>
-                <div style={{ flexDirection: 'column' }} >
-                    <Title keyboard level={5}>Total Muertes</Title>
-                    <Text type="danger">{country['Total Deaths_text']}</Text>
-                </div>
-            </div>
-
-            <div style={{ display: "flex", marginBottom: '1.5rem', textAlign: 'center' }}>
-                <div style={{ flexDirection: 'column' }}>
-                    <Title keyboard level={5}>Total Recuperados</Title>
-                    <Text>{country['Total Recovered_text']}</Text>
-                </div>
-                <div style={{ flexDirection: 'column' }}>
-                    <Title keyboard level={5}>Nuevos Casos</Title>
-                    <Text>{country['New Cases_text']}</Text>
-                </div>
-            </div>
-
-            <div style={{ display: "flex", marginBottom: '1.5rem', textAlign: 'center' }}>
-                <div style={{ flexDirection: 'column' }}>
-                    <Title keyboard level={5}>Nuevas Muertes</Title>
-                    <Text>{country['New Deaths_text']}</Text>
-                </div>
-                <div style={{ flexDirection: 'column' }}>
-                    <Title keyboard level={5}>Última Actualización</Title>
-                    <Text>{country['Last Update']}</Text>
-                </div>
-            </div> */}
-        </Card>
+            <Row align="middle" gutter={[8, 16]}>
+                <Col xl={modal ? 24 : 4} md={8} xs={24}>
+                    <Flag 
+                        code={`${countries[`${country.Country_text}`]}`} 
+                        fallback={<FlagOutlined style={flagStyle} />} 
+                        height="100" 
+                        style={{ borderRadius: 10, margin: 5 }}
+                     />
+                </Col>
+                <Col xl={modal ? 24 : 4} md={4} xs={24}>
+                    <div style={flexStyle} >
+                        <Title level={5}>Muertes</Title>
+                        <Text>{country['Total Deaths_text']}</Text>
+                    </div>
+                </Col>
+                <Col xl={modal ? 24 : 4} md={4} xs={24}>
+                    <div style={flexStyle}>
+                        <Title level={5}>Recuperados</Title>
+                        <Text>{country['Total Recovered_text']}</Text>
+                    </div>
+                </Col>
+                <Col xl={modal ? 24 : 4} md={4} xs={24}>
+                    <div style={flexStyle}>
+                        <Title level={5}>Nuevos Casos</Title>
+                        <Text>{country['New Cases_text'] !== '' ? country['New Cases_text'] : 'N/A'}</Text>
+                    </div>
+                </Col>
+                <Col xl={modal ? 24 : 4} md={4} xs={24}>
+                    <div style={flexStyle}>
+                        <Title level={5}>Nuevas Muertes</Title>
+                        <Text>{country['New Deaths_text'] !== '' ? country['New Deaths_text'] : 'N/A'}</Text>
+                    </div>
+                </Col>
+                <Col xl={modal ? 24 : 4} md={4} xs={24}>
+                    <div style={flexStyle}>
+                        <Title level={5}>Última Actualización</Title>
+                        <Text>{country['Last Update']}</Text>
+                    </div>
+                </Col>
+            </Row>
+        </Card> : null
     )
 }
+
+
+

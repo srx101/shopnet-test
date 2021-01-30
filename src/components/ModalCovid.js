@@ -17,8 +17,14 @@ export default function ModalCovid({ visible, setVisible, cntr }) {
 
 
     return (
-        <Modal title={countryData.Country_text} visible={visible} onCancel={() => setVisible(false)} >
-            <ListItem country={countryData}/>
+        <Modal
+            footer={[]}
+            title={countryData.Country_text}
+            visible={visible}
+            onCancel={() =>
+                setVisible(false)}
+        >
+            <ListItem modal={true} country={countryData} />
         </Modal>
     )
 }
