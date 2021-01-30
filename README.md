@@ -22,4 +22,9 @@ Test realizado con React Js.
 
 Enlace al deploy de Firebase Hosting: 
 
+<p align="center">
+  <img src="./public/virus128.png" alt="Virus logo">
+</p>
+
+
 [https://covid-api-214bf.web.app/]
