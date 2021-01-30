@@ -20,11 +20,11 @@ Test realizado con React Js.
   <img src="./public/logo192.png" alt="React logo">
 </p>
 
-Enlace al deploy de Firebase Hosting: 
+Enlace al deploy de Firebase Hosting: [https://covid-api-214bf.web.app/]
 
 <p align="center">
   <img src="./public/virus128.png" alt="Virus logo">
 </p>
 
 
-[https://covid-api-214bf.web.app/]
+
