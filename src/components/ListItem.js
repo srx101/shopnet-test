@@ -31,15 +31,15 @@ export default function ListItem({ country, setVisible, setCntr, modal }) {
 
     return (
 
-        country.Country_text ? <Card style={cardStyle} bordered={!modal} hoverable={setVisible} onClick={!modal ? () => onCardClick() : null}>
+        country.Country_text ? <Card key={country.Country_text} style={cardStyle} bordered={!modal} hoverable={setVisible} onClick={!modal ? () => onCardClick() : null}>
             {!modal ? <Title style={{ margin: 10, color: '#2ec4b6' }} level={4}>{country.Country_text}</Title> : null}
 
-            <Row align="middle" gutter={[8, 16]}>
+            <Row align='middle' gutter={[8, 16]}>
                 <Col xl={modal ? 24 : 4} md={8} xs={24}>
                     <Flag 
                         code={`${countries[`${country.Country_text}`]}`} 
                         fallback={<FlagOutlined style={flagStyle} />} 
-                        height="100" 
+                        height='100' 
                         style={{ borderRadius: 10, margin: 5 }}
                      />
                 </Col>

@@ -45,6 +45,7 @@ export default function Covid() {
             {loading ? <Skeleton active /> :
                 covidData.map((country) => (
                     <ListItem
+                        key={country.Country_text}
                         setVisible={setVisible}
                         setCntr={setCntr}
                         country={country}
